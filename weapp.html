@@ -1,0 +1,60 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>跳转小程序示例</title>
+  <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+</head>
+<body onselectstart="return false">
+  <wx-open-launch-weapp id="launch-btn" username="gh_e7a5f0e4ceae"
+    style="width: 100%;max-width: 370px;display: flex;height: 30px;margin: 0 auto;">
+    <template>
+      <style>
+        .btn {
+          border: none;
+          width: 100%;
+          height: 50px;
+          font-size: 14px;
+          color: #767F8A;
+          background: #d4e4ff;
+          border-radius: 7px;
+        }
+      </style>
+      <button class="btn">进入云开发官方小程序体验</button>
+    </template>
+  </wx-open-launch-weapp>
+  <script>
+    if (isWeixinBrowser()) {
+          wx.config({
+            appId: '',//替换自己的小程序APPID（云开发所属的已认证非个人主体小程序）
+            timestamp: 0,
+            nonceStr: 'nonceStr',
+            signature: 'signature',
+            jsApiList: ['openWeApp'],
+            openTagList:['wx-open-launch-weapp'],
+            debug: false
+          });
+          wx.ready(function () {
+            var btn = document.getElementById('launch-btn');
+            btn.addEventListener('launch', function (e) {
+              console.log('success');
+            });
+            btn.addEventListener('error', function (e) {
+              console.log('fail', e.detail);
+            });
+          });
+    }
+    function isWeixinBrowser() {
+      var agent = navigator.userAgent.toLowerCase();
+      if (agent.match(/MicroMessenger/i) == "micromessenger") {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  </script>
+</body>
+
+</html>
